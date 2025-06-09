@@ -16,7 +16,7 @@ const Footer = () => {
                 </ul>
         </div>
 
-        <p className='text-[12px] font-medium mt-[40px]'>Host your events with Stumbll ↗</p>
+        <p className='text-[12px] font-medium mt-[40px]'>Host your events with Stumbll &rarr;</p>
 
         <div className='flex gap-2'>
              <Instagram height={16} width={16}/>

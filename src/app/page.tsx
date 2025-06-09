@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AuthenticateModal from '@/components/modals/AuthenticateModal';
 import AuthenticationFormModal from '@/components/modals/AuthenticationFormModal';
@@ -18,18 +18,6 @@ interface Host {
   profilePictureUrl: string | null;
 }
 
-interface Event {
-  id: number;
-  name: string;
-  description: string;
-  startTime: string;
-  endTime: string;
-  status: string;
-  coverPhotoUrl: string;
-  location: Location;
-  host: Host;
-}
-
 interface GuestData {
   id?: number;
   fullName?: string;
@@ -41,7 +29,7 @@ interface GuestData {
 
 const Page = () => {
   const router = useRouter();
-  const { authToken, setAuthToken } = useAuth();
+  const { setAuthToken } = useAuth();
   const [currentStep, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [guestData, setGuestData] = useState<GuestData | null>(null);
@@ -66,7 +54,7 @@ const Page = () => {
     }
   };
 
-  const handleSendOtp = async (identifier: string, identifierType: string) => {
+  const handleSendOtp = async (identifier: string) => {
     try {
       setLoading(true);
       // Simulate API delay
@@ -80,7 +68,7 @@ const Page = () => {
     }
   };
 
-  const handleVerifyOtp = async (identifier: string, identifierType: string, otp: string) => {
+  const handleVerifyOtp = async (identifier: string) => {
     try {
       setLoading(true);
       // Simulate API delay

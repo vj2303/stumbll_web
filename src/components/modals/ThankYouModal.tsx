@@ -14,7 +14,6 @@ interface GuestData {
 interface ThankYouModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onNext: () => void;
   guestData?: GuestData;
   onUpdateGuest: (name: string, age: string) => Promise<void>;
   loading: boolean;
@@ -23,7 +22,6 @@ interface ThankYouModalProps {
 const ThankYouModal: React.FC<ThankYouModalProps> = ({ 
   isOpen, 
   onClose, 
-  onNext, 
   guestData,
   onUpdateGuest,
   loading

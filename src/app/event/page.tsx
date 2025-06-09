@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { MapPin } from 'lucide-react';
+import Image from 'next/image';
 
 const EventPage = () => {
   const { authToken, clearAuth } = useAuth();
@@ -47,11 +48,6 @@ const EventPage = () => {
     return null;
   }
 
-  const handleLogout = () => {
-    clearAuth();
-    router.push('/');
-  };
-
   return (
     <div className="min-h-screen flex flex-col">
       <Header/>
@@ -68,10 +64,13 @@ const EventPage = () => {
                 
                 <div className="relative">                   
     <div className="aspect-video overflow-hidden relative">                                                                            
-        <img                        
+        <Image                        
         src="/banner.png"                       
         alt="Event Banner"                       
-        className="w-full h-full"                     
+        className="w-full h-full"
+        width={800}
+        height={450}
+        priority
         />                    
     </div>                                      
 
@@ -92,10 +91,12 @@ const EventPage = () => {
             {eventData.attendees.slice(0, 3).map((attendee, index) => (                             
                 <div key={index} className="flex items-center">                               
                 {attendee.avatar ? (                                 
-                    <img                                    
+                    <Image                                    
                     className="w-8 h-8 rounded-full border-2 border-white shadow-sm"                                   
                     src={attendee.avatar}                                   
-                    alt={attendee.name}                                 
+                    alt={attendee.name}
+                    width={32}
+                    height={32}                                 
                     />                               
                 ) : (                                 
                     <div className="w-8 h-8 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center shadow-sm">                                   
@@ -120,10 +121,12 @@ const EventPage = () => {
                         <div>
                         <h3 className="font-semibold text-gray-900">Hosted By</h3>
                         <div className="flex items-center mt-2">
-                            <img 
+                            <Image 
                             className="w-10 h-10 rounded-full"
                             src={'/banner.png'}
                             alt={eventData.host.name}
+                            width={40}
+                            height={40}
                             />
                             <div className="ml-3">
                             <p className="font-medium text-gray-900">{eventData.host.name}</p>
@@ -150,10 +153,12 @@ const EventPage = () => {
                         {eventData.gallery.map((item, index) => (
                         <div key={index} className="relative">
                             <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden">
-                            <img 
+                            <Image 
                                 src={item.image}
                                 alt={`Gallery ${index + 1}`}
                                 className="w-full h-full object-cover"
+                                width={200}
+                                height={200}
                             />
                             </div>
                             <span className="absolute bottom-2 left-2 text-xs text-white bg-black bg-opacity-60 px-2 py-1 rounded">

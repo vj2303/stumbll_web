@@ -6,7 +6,6 @@ import OTPInput from '@/components/OTPInput';
 interface AuthenticationFormModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onNext: () => void;
   onSendOtp: (identifier: string, identifierType: string) => Promise<boolean>;
   onVerifyOtp: (identifier: string, identifierType: string, otp: string) => Promise<void>;
   loading: boolean;
@@ -14,8 +13,7 @@ interface AuthenticationFormModalProps {
 
 const AuthenticationFormModal: React.FC<AuthenticationFormModalProps> = ({ 
   isOpen, 
-  onClose, 
-  onNext,
+  onClose,
   onSendOtp,
   onVerifyOtp,
   loading

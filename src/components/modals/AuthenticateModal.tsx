@@ -4,14 +4,14 @@ import Footer from '@/components/Footer';
 
 interface AuthenticateModalProps {
   isOpen: boolean;
-  onClose: () => void;
   onNext: () => void;
+  onClose: () => void;
 }
 
 const AuthenticateModal: React.FC<AuthenticateModalProps> = ({ 
   isOpen, 
-  onClose, 
-  onNext 
+  onNext,
+  onClose 
 }) => {
   if (!isOpen) return null;
 
@@ -21,12 +21,12 @@ const AuthenticateModal: React.FC<AuthenticateModalProps> = ({
       <div className="fixed inset-0 z-50 flex items-center justify-center">
         <div className="absolute inset-0 bg-white/30 backdrop-blur-md"></div>
         <div className="relative bg-white rounded-lg p-8 shadow-xl max-w-md w-full mx-4">
-          {/* <button 
+          <button 
             onClick={onClose}
             className="absolute top-4 right-4 text-red-500 hover:text-red-600 text-xl"
           >
             ✕
-          </button> */}
+          </button>
 
           <div className="space-y-6">
             <div className="text-center">
