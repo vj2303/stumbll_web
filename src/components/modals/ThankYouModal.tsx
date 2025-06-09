@@ -65,7 +65,11 @@ const ThankYouModal: React.FC<ThankYouModalProps> = ({
 
   return (
     <>
-      <Header />
+      {/* Header with higher z-index to stay above blur */}
+      <div className="fixed top-0 left-0 right-0 z-[70]">
+        <Header />
+      </div>
+      
       <div className="fixed inset-0 z-50 flex items-center justify-center">
         <div className="absolute inset-0 bg-white/30 backdrop-blur-md"></div>
         <div className="relative bg-white rounded-lg p-8 shadow-xl max-w-md w-full mx-4">
@@ -128,14 +132,18 @@ const ThankYouModal: React.FC<ThankYouModalProps> = ({
             <button 
               onClick={handleContinue}
               disabled={!name.trim() || !age || loading}
-              className="w-full bg-red-500 hover:bg-red-600 disabled:bg-gray-400 text-white py-3 rounded-lg transition-colors font-medium"
+              className="w-full bg-[#F94C57]   text-white py-3 rounded-lg transition-colors font-medium"
             >
               {loading ? 'Saving...' : 'Continue to Ticket Confirmation'}
             </button>
           </div>
         </div>
       </div>
-      <Footer />
+      
+      {/* Footer with higher z-index to stay above blur - positioned at bottom */}
+      <div className="fixed bottom-0 left-0 right-0 z-[70] bg-white shadow-sm">
+        <Footer />
+      </div>
     </>
   );
 };
