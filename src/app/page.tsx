@@ -7,17 +7,6 @@ import ThankYouModal from '@/components/modals/ThankYouModal';
 import ConfirmTicketsModal from '@/components/modals/ConfirmTicketsModal';
 import { useAuth } from '@/context/AuthContext';
 
-interface Location {
-  name: string;
-  address: string;
-}
-
-interface Host {
-  fullName: string;
-  username: string;
-  profilePictureUrl: string | null;
-}
-
 interface GuestData {
   id?: number;
   fullName?: string;
@@ -59,6 +48,7 @@ const Page = () => {
       setLoading(true);
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log(`Sending OTP to ${identifier}`);
       return true;
     } catch (error) {
       console.error('Error sending OTP:', error);

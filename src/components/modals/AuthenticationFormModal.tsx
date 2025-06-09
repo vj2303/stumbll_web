@@ -92,6 +92,7 @@ const AuthenticationFormModal: React.FC<AuthenticationFormModalProps> = ({
       setSuccess('OTP verified successfully!');
       // The parent component will handle moving to next step
     } catch (error) {
+      console.error('OTP verification failed:', error);
       setError('Invalid OTP. Please try again.');
     }
   };
@@ -209,7 +210,7 @@ const AuthenticationFormModal: React.FC<AuthenticationFormModalProps> = ({
             )}
 
             <div className="text-center">
-              <span className="text-gray-600 text-sm">Don't have an account? </span>
+              <span className="text-gray-600 text-sm">Don&apos;t have an account? </span>
               <span className="text-red-500 text-sm cursor-pointer hover:underline">Sign Up</span>
             </div>
           </div>

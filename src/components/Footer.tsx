@@ -9,7 +9,7 @@ const Footer = () => {
         <div className='flex '>
                 <StumblLogo color='#ffff'/>
                 <ul className='flex ml-2 flex-row gap-2 items-center'>
-                    <li>What's New</li>
+                    <li>What&apos;s New</li>
                     <li>Discover</li>
                     <li>Pricing</li>
                     <li>Help</li>

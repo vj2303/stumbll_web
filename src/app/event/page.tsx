@@ -8,7 +8,7 @@ import { MapPin } from 'lucide-react';
 import Image from 'next/image';
 
 const EventPage = () => {
-  const { authToken, clearAuth } = useAuth();
+  const { authToken } = useAuth();
   const router = useRouter();
 
   // Mock event data - in a real app, you would fetch this using the authToken
