@@ -5,6 +5,8 @@ import AuthenticateModal from '@/components/modals/AuthenticateModal';
 import AuthenticationFormModal from '@/components/modals/AuthenticationFormModal';
 import ThankYouModal from '@/components/modals/ThankYouModal';
 import ConfirmTicketsModal from '@/components/modals/ConfirmTicketsModal';
+import BlurOverlay from '@/components/BlurOverlay';
+import EventPage from './event/page'; // Import your EventPage component
 import { useAuth } from '@/context/AuthContext';
 
 interface GuestData {
@@ -42,6 +44,9 @@ const Page = () => {
       profilePictureUrl: null
     }
   };
+
+  // Check if any modal is open
+  const isAnyModalOpen = currentStep >= 1 && currentStep <= 4;
 
   // Updated to match AuthenticationFormModal interface
   const handleSendOtp = async (identifier: string, identifierType: string): Promise<boolean> => {
@@ -151,42 +156,53 @@ const Page = () => {
   };
 
   return (
-    <>
-      <AuthenticateModal
-        isOpen={currentStep === 1}
-        onClose={handleClose}
-        onNext={handleNext}
-      />
+    <div className="relative">
+      {/* Background content with blur effect when modals are open */}
+      <BlurOverlay 
+        isBlurred={isAnyModalOpen} 
+        className="min-h-screen"
+      >
+        <EventPage />
+      </BlurOverlay>
 
-      <AuthenticationFormModal
-        isOpen={currentStep === 2}
-        onClose={handleClose}
-        onSendOtp={handleSendOtp}
-        onVerifyOtp={handleVerifyOtp}
-        loading={loading}
-      />
+      {/* All modals with higher z-index */}
+      <div className="relative z-50">
+        <AuthenticateModal
+          isOpen={currentStep === 1}
+          onClose={handleClose}
+          onNext={handleNext}
+        />
 
-      <ThankYouModal
-        isOpen={currentStep === 3}
-        onClose={handleClose}
-        guestData={guestData || undefined}
-        onUpdateGuest={handleUpdateGuest}
-        loading={loading}
-      />
+        <AuthenticationFormModal
+          isOpen={currentStep === 2}
+          onClose={handleClose}
+          onSendOtp={handleSendOtp}
+          onVerifyOtp={handleVerifyOtp}
+          loading={loading}
+        />
 
-      <ConfirmTicketsModal
-        isOpen={currentStep === 4}
-        onClose={handleClose}
-        onConfirm={handleConfirmTickets}
-        eventData={{
-          title: mockEventData.name,
-          date: formatDate(mockEventData.startTime),
-          time: formatTime(mockEventData.startTime),
-          location: mockEventData.location.name
-        }}
-        loading={loading}
-      />
-    </>
+        <ThankYouModal
+          isOpen={currentStep === 3}
+          onClose={handleClose}
+          guestData={guestData || undefined}
+          onUpdateGuest={handleUpdateGuest}
+          loading={loading}
+        />
+
+        <ConfirmTicketsModal
+          isOpen={currentStep === 4}
+          onClose={handleClose}
+          onConfirm={handleConfirmTickets}
+          eventData={{
+            title: mockEventData.name,
+            date: formatDate(mockEventData.startTime),
+            time: formatTime(mockEventData.startTime),
+            location: mockEventData.location.name
+          }}
+          loading={loading}
+        />
+      </div>
+    </div>
   );
 };
 

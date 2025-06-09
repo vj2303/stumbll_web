@@ -121,7 +121,11 @@ const AuthenticationFormModal: React.FC<AuthenticationFormModalProps> = ({
 
   return (
     <>
-      <Header />
+      {/* Header with higher z-index to stay above blur */}
+      <div className="fixed top-0 left-0 right-0 z-[70]">
+        <Header />
+      </div>
+      
       <div className="fixed inset-0 z-50 flex items-center justify-center">
         <div className="absolute inset-0 bg-white/30 backdrop-blur-md"></div>
         <div className="relative bg-white rounded-lg p-8 shadow-xl max-w-md w-full mx-4">
@@ -158,8 +162,7 @@ const AuthenticationFormModal: React.FC<AuthenticationFormModalProps> = ({
                 type="text"
                 value={identifier}
                 onChange={(e) => handleIdentifierChange(e.target.value)}
-                disabled={showOtpField || loading}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 text-black disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400 text-black"
                 placeholder="Enter email or phone number"
               />
           
@@ -175,8 +178,7 @@ const AuthenticationFormModal: React.FC<AuthenticationFormModalProps> = ({
                   </p>
                   <button
                     onClick={handleResendOtp}
-                    disabled={loading}
-                    className="text-xs text-red-500 hover:text-red-600 underline disabled:opacity-50"
+                    className="text-xs text-red-500 hover:text-red-600 underline"
                   >
                     {loading ? 'Sending...' : 'Resend OTP'}
                   </button>
@@ -196,8 +198,7 @@ const AuthenticationFormModal: React.FC<AuthenticationFormModalProps> = ({
             {!showOtpField ? (
               <button 
                 onClick={handleSendOtp}
-                disabled={!identifier.trim() || loading}
-                className="w-full bg-red-500 hover:bg-red-600 disabled:bg-gray-400 text-white py-3 rounded-lg transition-colors"
+                className="w-full bg-[#F94C57] hover:bg-[#e03e49] text-white py-3 rounded-lg transition-colors"
               >
                 {loading ? 'Sending...' : 'Send OTP'}
               </button>
@@ -205,8 +206,7 @@ const AuthenticationFormModal: React.FC<AuthenticationFormModalProps> = ({
               <div className="space-y-3">
                 <button 
                   onClick={handleVerifyOtp}
-                  disabled={otp.join('').length < 6 || loading}
-                  className="w-full bg-red-500 hover:bg-red-600 disabled:bg-gray-400 text-white py-3 rounded-lg transition-colors"
+                  className="w-full bg-[#F94C57] hover:bg-[#e03e49] text-white py-3 rounded-lg transition-colors"
                 >
                   {loading ? 'Verifying...' : 'Verify & Continue'}
                 </button>
@@ -221,7 +221,11 @@ const AuthenticationFormModal: React.FC<AuthenticationFormModalProps> = ({
           </div>
         </div>
       </div>
-      <Footer />
+      
+      {/* Footer with higher z-index to stay above blur - positioned at bottom */}
+      <div className="fixed bottom-0 left-0 right-0 z-[70] bg-white shadow-sm">
+        <Footer />
+      </div>
     </>
   );
 };

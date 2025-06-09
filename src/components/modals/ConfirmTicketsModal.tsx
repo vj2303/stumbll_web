@@ -33,7 +33,11 @@ const ConfirmTicketsModal: React.FC<ConfirmTicketsModalProps> = ({
 
   return (
     <>
-      <Header />
+      {/* Header with higher z-index to stay above blur */}
+      <div className="fixed top-0 left-0 right-0 z-[70]">
+        <Header />
+      </div>
+      
       <div className="fixed inset-0 z-50 flex items-center justify-center">
         <div className="absolute inset-0 bg-white/30 backdrop-blur-md"></div>
         <div className="relative bg-white rounded-lg p-8 shadow-xl max-w-md w-full mx-4">
@@ -52,31 +56,7 @@ const ConfirmTicketsModal: React.FC<ConfirmTicketsModalProps> = ({
               </p>
             </div>
 
-            {eventData && (
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="font-semibold text-black mb-2">Event Details</h3>
-                {eventData.title && (
-                  <p className="text-sm text-gray-700 mb-1">
-                    <span className="font-medium">Event:</span> {eventData.title}
-                  </p>
-                )}
-                {eventData.date && (
-                  <p className="text-sm text-gray-700 mb-1">
-                    <span className="font-medium">Date:</span> {eventData.date}
-                  </p>
-                )}
-                {eventData.time && (
-                  <p className="text-sm text-gray-700 mb-1">
-                    <span className="font-medium">Time:</span> {eventData.time}
-                  </p>
-                )}
-                {eventData.location && (
-                  <p className="text-sm text-gray-700">
-                    <span className="font-medium">Location:</span> {eventData.location}
-                  </p>
-                )}
-              </div>
-            )}
+           
 
             <button 
               onClick={handleConfirm}
@@ -102,7 +82,11 @@ const ConfirmTicketsModal: React.FC<ConfirmTicketsModalProps> = ({
           </div>
         </div>
       </div>
-      <Footer />
+      
+      {/* Footer with higher z-index to stay above blur - positioned at bottom */}
+      <div className="fixed bottom-0 left-0 right-0 z-[70] bg-white shadow-sm">
+        <Footer />
+      </div>
     </>
   );
 };
