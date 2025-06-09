@@ -217,10 +217,12 @@ const EventPage = () => {
                 {/* QR Code */}
                 <div className="">
                     <div className="flex items-center space-x-3">
-                    <img 
+                    <Image 
                         src="/qrr.png" 
                         alt="QR Code" 
                         className="w-12 h-12 bg-[#F94C57] p-1 rounded-lg"
+                        width={48}
+                        height={48}
                     />
                     <p className="text-[14px] font-medium text-[#120D26]">Tap to view ticket</p>
                     </div>

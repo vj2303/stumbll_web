@@ -43,12 +43,13 @@ const Page = () => {
     }
   };
 
-  const handleSendOtp = async (identifier: string) => {
+  // Updated to match AuthenticationFormModal interface
+  const handleSendOtp = async (identifier: string, identifierType: string): Promise<boolean> => {
     try {
       setLoading(true);
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log(`Sending OTP to ${identifier}`);
+      console.log(`Sending OTP to ${identifier} (${identifierType})`);
       return true;
     } catch (error) {
       console.error('Error sending OTP:', error);
@@ -58,16 +59,20 @@ const Page = () => {
     }
   };
 
-  const handleVerifyOtp = async (identifier: string) => {
+  // Updated to match AuthenticationFormModal interface
+  const handleVerifyOtp = async (identifier: string, identifierType: string, otp: string): Promise<void> => {
     try {
       setLoading(true);
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1000));
       
+      console.log(`Verifying OTP ${otp} for ${identifier} (${identifierType})`);
+      
       // Mock successful verification
       const mockGuestData = {
         id: 1,
-        email: identifier,
+        email: identifierType === 'email' ? identifier : null,
+        phoneNumber: identifierType === 'phone' ? identifier : null,
         status: 'verified'
       };
       
@@ -83,7 +88,7 @@ const Page = () => {
     }
   };
 
-  const handleUpdateGuest = async (name: string, age: string) => {
+  const handleUpdateGuest = async (name: string, age: string): Promise<void> => {
     try {
       setLoading(true);
       // Simulate API delay
@@ -105,7 +110,7 @@ const Page = () => {
     }
   };
 
-  const handleConfirmTickets = async () => {
+  const handleConfirmTickets = async (): Promise<void> => {
     try {
       setLoading(true);
       // Simulate API delay for ticket confirmation
@@ -156,7 +161,6 @@ const Page = () => {
       <AuthenticationFormModal
         isOpen={currentStep === 2}
         onClose={handleClose}
-        onNext={handleNext}
         onSendOtp={handleSendOtp}
         onVerifyOtp={handleVerifyOtp}
         loading={loading}
@@ -165,7 +169,6 @@ const Page = () => {
       <ThankYouModal
         isOpen={currentStep === 3}
         onClose={handleClose}
-        onNext={handleNext}
         guestData={guestData || undefined}
         onUpdateGuest={handleUpdateGuest}
         loading={loading}
