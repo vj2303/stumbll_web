@@ -52,9 +52,31 @@ const ConfirmTicketsModal: React.FC<ConfirmTicketsModalProps> = ({
               </p>
             </div>
 
-        
-
-  
+            {eventData && (
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h3 className="font-semibold text-black mb-2">Event Details</h3>
+                {eventData.title && (
+                  <p className="text-sm text-gray-700 mb-1">
+                    <span className="font-medium">Event:</span> {eventData.title}
+                  </p>
+                )}
+                {eventData.date && (
+                  <p className="text-sm text-gray-700 mb-1">
+                    <span className="font-medium">Date:</span> {eventData.date}
+                  </p>
+                )}
+                {eventData.time && (
+                  <p className="text-sm text-gray-700 mb-1">
+                    <span className="font-medium">Time:</span> {eventData.time}
+                  </p>
+                )}
+                {eventData.location && (
+                  <p className="text-sm text-gray-700">
+                    <span className="font-medium">Location:</span> {eventData.location}
+                  </p>
+                )}
+              </div>
+            )}
 
             <button 
               onClick={handleConfirm}
@@ -75,7 +97,7 @@ const ConfirmTicketsModal: React.FC<ConfirmTicketsModalProps> = ({
             </button>
 
             <p className="text-xs text-gray-500 text-center">
-              After confirmation, you'll be redirected to the event page where you can view all details.
+              After confirmation, you&apos;ll be redirected to the event page where you can view all details.
             </p>
           </div>
         </div>

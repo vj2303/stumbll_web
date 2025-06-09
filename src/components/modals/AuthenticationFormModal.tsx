@@ -67,7 +67,7 @@ const AuthenticationFormModal: React.FC<AuthenticationFormModalProps> = ({
       await onSendOtp(identifier, identifierType);
       setSuccess(`OTP sent successfully to your ${identifierType}`);
       setShowOtpField(true);
-    } catch (error) {
+    } catch {
       setError('Failed to send OTP. Please try again.');
     }
   };
@@ -91,8 +91,8 @@ const AuthenticationFormModal: React.FC<AuthenticationFormModalProps> = ({
       await onVerifyOtp(identifier, identifierType, otpString);
       setSuccess('OTP verified successfully!');
       // The parent component will handle moving to next step
-    } catch (error) {
-      console.error('OTP verification failed:', error);
+    } catch (err) {
+      console.error('OTP verification failed:', err);
       setError('Invalid OTP. Please try again.');
     }
   };
@@ -102,7 +102,7 @@ const AuthenticationFormModal: React.FC<AuthenticationFormModalProps> = ({
       await onSendOtp(identifier, identifierType);
       setError('');
       setSuccess('OTP resent successfully!');
-    } catch (error) {
+    } catch {
       setError('Failed to resend OTP. Please try again.');
     }
   };
@@ -114,6 +114,11 @@ const AuthenticationFormModal: React.FC<AuthenticationFormModalProps> = ({
     setSuccess('');
   };
 
+  const handleClose = () => {
+    resetForm();
+    onClose();
+  };
+
   return (
     <>
       <Header />
@@ -121,7 +126,7 @@ const AuthenticationFormModal: React.FC<AuthenticationFormModalProps> = ({
         <div className="absolute inset-0 bg-white/30 backdrop-blur-md"></div>
         <div className="relative bg-white rounded-lg p-8 shadow-xl max-w-md w-full mx-4">
           <button 
-            onClick={onClose}
+            onClick={handleClose}
             className="absolute top-4 right-4 text-red-500 hover:text-red-600 text-xl"
           >
             ✕

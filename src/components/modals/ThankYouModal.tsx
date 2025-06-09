@@ -58,7 +58,7 @@ const ThankYouModal: React.FC<ThankYouModalProps> = ({
     try {
       await onUpdateGuest(name, age);
       // The parent component will handle moving to next step
-    } catch (error) {
+    } catch {
       setError('Failed to update information. Please try again.');
     }
   };
